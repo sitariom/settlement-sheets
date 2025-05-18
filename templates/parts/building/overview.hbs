@@ -1,5 +1,12 @@
 <div class="tab overview" data-group="primary" data-tab="overview">
-  <div class="description">
-    {{editor description target="system.description" button=true editable=editable}}
+  <div class="definition">
+    <h3>{{localize "Definition of building"}}</h3>
+    <div class="definition-editor">
+      {{editor definition target="system.definition" button=true editable=editable id="building-definition-editor"}}
+    </div>
+  </div>
+  <div class="benefits">
+    <h3>{{localize "Benefits"}}</h3>
+    {{editor benefits target="system.benefits" button=true editable=editable}}
   </div>
 </div>

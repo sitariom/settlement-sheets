@@ -5,10 +5,10 @@
         <label class="title">{{localize tracker.label}}</label>
         <label class="content">
           {{#ifeq tracker.type 'number'}}
-            <input type="number" name="system.trackers.{{id}}.value" value="{{tracker.value}}"/>
+            <input type="number" name="system.trackers.{{tracker.id}}.value" value="{{tracker.value}}"/>
           {{/ifeq}}
           {{#ifeq tracker.type 'string'}}
-            <input type="text" name="system.trackers.{{id}}.value" value="{{tracker.value}}"/>
+            <input type="text" name="system.trackers.{{tracker.id}}.value" value="{{tracker.value}}"/>
           {{/ifeq}}
         </label>
       </div>

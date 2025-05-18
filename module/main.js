@@ -41,4 +41,44 @@ Hooks.once('init', () => {
 Hooks.once('ready', () => {
   // Load the settings into the world
   _registerModuleSettings()
+  
+  // Migrar dados existentes para a nova estrutura
+  _migrateExistingData()
 })
+
+// Função para migrar dados existentes
+async function _migrateExistingData() {
+  // Migrar edifícios que têm dados no campo description para o novo campo definition
+  const buildings = game.items.filter(i => i.type === 'settlement-sheets.building' && 
+                                      i.system.description && 
+                                      !i.system.definition)
+  
+  for (const building of buildings) {
+    // Se o edifício tem description mas não tem definition, copiar o conteúdo
+    if (building.system.description && !building.system.definition) {
+      await building.update({
+        'system.definition': building.system.description
+      })
+      console.log(`Settlement-Sheets | Migrado dados de description para definition para o edifício: ${building.name}`)
+    }
+  }
+  
+  // Verificar edifícios dentro de assentamentos
+  const settlements = game.actors.filter(a => a.type === 'settlement-sheets.settlement')
+  
+  for (const settlement of settlements) {
+    const embeddedBuildings = settlement.items.filter(i => i.type === 'settlement-sheets.building' && 
+                                                    i.system.description && 
+                                                    !i.system.definition)
+    
+    if (embeddedBuildings.length > 0) {
+      const updates = embeddedBuildings.map(building => ({
+        _id: building.id,
+        'system.definition': building.system.description
+      }))
+      
+      await settlement.updateEmbeddedDocuments('Item', updates)
+      console.log(`Settlement-Sheets | Migrado dados de ${updates.length} edifícios no assentamento: ${settlement.name}`)
+    }
+  }
+}

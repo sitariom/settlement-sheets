@@ -3,12 +3,12 @@
   <div class="ss-grid ss-grid-3col">
     {{#each page_trackers as |tracker|}}
       <div class="tracker">
-        <label class="title">{{tracker.label}}</label>
+        <label class="title">{{localize tracker.label}}</label>
         {{#ifeq tracker.type 'number'}}
           <label class="content">{{tracker.prepend}}{{tracker.value}}{{tracker.append}}</label>
         {{/ifeq}}
         {{#ifeq tracker.type 'string'}}
-          <input type="text" name="system.trackers.{{id}}.value" value="{{tracker.value}}"/>
+          <input type="text" name="system.trackers.{{tracker.id}}.value" value="{{tracker.value}}"/>
         {{/ifeq}}
       </div>
     {{/each}}

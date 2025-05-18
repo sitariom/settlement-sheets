@@ -6,10 +6,11 @@ export class BuildingModel extends foundry.abstract.TypeDataModel {
     const schema = {}
 
     // Overview tab
-    schema.description = new fields.HTMLField({
+    schema.definition = new fields.HTMLField({
       initial: '',
       required: false,
-      blank: true
+      blank: true,
+      nullable: false
     })
 
     schema.benefits = new fields.HTMLField({

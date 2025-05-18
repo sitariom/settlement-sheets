@@ -162,15 +162,15 @@ export class SettlementActorSheet extends ActorSheet {
         // Add UUID to the building data
         i.uuid = `Actor.${this.actor.id}.Item.${i._id}`
 
-        // Enrich building description
-        i.system.description = await TextEditor.enrichHTML(i.system.description, {
+        // Enrich building definition
+        i.system.definition = await TextEditor.enrichHTML(i.system.definition || "", {
           async: true,
           secrets: this.object.isOwner,
           relativeTo: this.object
         })
 
         // Enrich building benefits
-        i.system.benefits = await TextEditor.enrichHTML(i.system.benefits, {
+        i.system.benefits = await TextEditor.enrichHTML(i.system.benefits || "", {
           async: true,
           secrets: this.object.isOwner,
           relativeTo: this.object
@@ -196,8 +196,8 @@ export class SettlementActorSheet extends ActorSheet {
       }
     }
 
-    // Assign the list of buildings to the actor data
-    context.actor.system.buildings = buildings
+    // Assign the list of buildings to the context
+    context.buildings = buildings
   }
 
   // Activate any listeners
@@ -237,6 +237,9 @@ export class SettlementActorSheet extends ActorSheet {
 
     // Open the new building for editing
     newBuilding[0].sheet.render(true)
+    
+    // Re-render the settlement sheet to update the buildings list
+    this.render(true)
   }
 
   // Handle removing a building from a settlement

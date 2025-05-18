@@ -6,7 +6,7 @@ export class BuildingItemSheet extends ItemSheet {
   static get defaultOptions () {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['building-sheet'],
-      template: 'modules/settlement-sheets/templates/settlement-sheet.hbs',
+      template: 'modules/settlement-sheets/templates/building-sheet.hbs',
       width: 600,
       height: 500,
       tabs: [{
@@ -89,15 +89,30 @@ export class BuildingItemSheet extends ItemSheet {
       context.trackers.push(statisticData)
     }
 
-    // The description field
-    context.description = await TextEditor.enrichHTML(this.object.system.description, {
+    // Set editable flag for the editor
+    context.editable = this.isEditable
+    
+    // The definition field
+    context.definition = await TextEditor.enrichHTML(this.object.system.definition || "", {
       async: true,
       secrets: this.object.isOwner,
       relativeTo: this.object
     })
-
+    
+    // Ensure definition is properly initialized if it's null or undefined
+    if (this.object.system.definition === null || this.object.system.definition === undefined) {
+      await this.object.update({
+        'system.definition': ''
+      })
+    }
+    
+    // Make sure definition is always available in the context
+    if (!context.definition) {
+      context.definition = this.object.system.definition || ''
+    }
+    
     // The benefits field
-    context.benefits = await TextEditor.enrichHTML(this.object.system.benefits, {
+    context.benefits = await TextEditor.enrichHTML(this.object.system.benefits || "", {
       async: true,
       secrets: this.object.isOwner,
       relativeTo: this.object
@@ -122,8 +137,69 @@ export class BuildingItemSheet extends ItemSheet {
   }
 
   /** @override */
+  async _onSubmit(event, {updateData=null, preventClose=false, preventRender=false}={}) {
+    // Capturar o conteúdo dos editores antes do envio do formulário
+    const form = this.element.find('form').get(0);
+    const editorElements = form.querySelectorAll('.editor-content');
+    
+    // Criar um objeto para armazenar os dados atualizados
+    const formData = {};
+    
+    // Capturar o conteúdo de todos os editores
+    for (let editor of editorElements) {
+      const target = editor.dataset.edit;
+      if (target) {
+        formData[target] = editor.innerHTML;
+      }
+    }
+    
+    // Mesclar os dados capturados com os dados de atualização existentes
+    updateData = foundry.utils.mergeObject(updateData || {}, formData);
+    
+    // Continuar com o envio padrão
+    return super._onSubmit(event, {updateData, preventClose, preventRender});
+  }
+  
+  /** @override */
+  async _updateObject(event, formData) {
+    // Continuar com a atualização padrão
+    return super._updateObject(event, formData);
+  }
+  
+  /** @override */
   activateListeners (html) {
     // Activate listeners
     super.activateListeners(html)
+    
+    // Adicionar manipuladores específicos para os editores
+    if (this.isEditable) {
+      // Manipulador para o editor de definição
+      const definitionEditor = html.find('#building-definition-editor');
+      if (definitionEditor.length) {
+        // Capturar eventos de mudança e perda de foco
+        definitionEditor.on('blur change', async (event) => {
+          const content = event.currentTarget.innerHTML;
+          await this.object.update({'system.definition': content});
+        });
+        
+        // Adicionar manipulador para o botão de salvar do editor
+        html.find('.editor-content[data-edit="system.definition"]').closest('.editor').find('button').on('click', async () => {
+          const content = definitionEditor.html();
+          await this.object.update({'system.definition': content});
+        });
+      }
+      
+      // Adicionar manipuladores para todos os botões de editor
+      html.find('.editor button').on('click', async (event) => {
+        const editor = $(event.currentTarget).closest('.editor').find('.editor-content');
+        const target = editor.data('edit');
+        if (target) {
+          const content = editor.html();
+          const updateData = {};
+          updateData[target] = content;
+          await this.object.update(updateData);
+        }
+      });
+    }
   }
 }

@@ -1,6 +1,13 @@
 {
   "TYPES.Actor.settlement-sheets.settlement": "Settlement",
   "TYPES.Item.settlement-sheets.building": "Building",
+  "Description": "Description",
+  "Benefits": "Benefits",
+  "PublicNotes": "Public Notes",
+  "PrivateNotes": "Private Notes",
+  "Overview": "Overview",
+  "Statistics": "Statistics",
+  "Notes": "Notes",
   "settlement-sheets": {
     "SettlementSheets": "Settlement Sheets",
     "EditImage": "Edit Image",
