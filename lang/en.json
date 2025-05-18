@@ -15,6 +15,9 @@
     "PrivateNotes": "Private Notes",
     "SettlementDescription": "Settlement Description",
     "InfluentialPeople": "Influential People",
+    "building": {
+      "Description": "Building Description"
+    },
     "DetailedStatistics": "Detailed Statistics",
     "MostPopulousBuildings": "Most Populous Buildings",
     "EditBuilding": "Edit Building",
