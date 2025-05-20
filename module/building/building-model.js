@@ -22,7 +22,9 @@ export class BuildingModel extends foundry.abstract.TypeDataModel {
     // Sheet trackers
     schema.trackers = new fields.ObjectField({
       initial: {},
-      required: false
+      required: true,
+      nullable: false,
+      validate: value => typeof value === 'object' && value !== null
     })
 
     // Notes Tab

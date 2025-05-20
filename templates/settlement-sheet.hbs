@@ -25,8 +25,10 @@
   {{!-- Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     <div class="item" data-tab="overview">{{localize "settlement-sheets.TABS.Overview"}}</div>
+    <div class="item" data-tab="places">{{localize "settlement-sheets.TABS.Places"}}</div>
     <div class="item" data-tab="statistics">{{localize "settlement-sheets.TABS.Statistics"}}</div>
     <div class="item" data-tab="buildings">{{localize "settlement-sheets.TABS.Buildings"}}</div>
+    <div class="item" data-tab="events">{{localize "settlement-sheets.TABS.Events"}}</div>
     <div class="item" data-tab="notes">{{localize "settlement-sheets.TABS.Notes"}}</div>
   </nav>
 
@@ -35,11 +37,17 @@
     {{!-- Overview Tab --}}
     {{> "modules/settlement-sheets/templates/parts/settlement/overview.hbs"}}
 
+    {{!-- Places Tab --}}
+    {{> "modules/settlement-sheets/templates/parts/settlement/places.hbs"}}
+
     {{!-- Statistics Tab --}}
     {{> "modules/settlement-sheets/templates/parts/settlement/statistics.hbs"}}
 
     {{!-- Buildings Tab --}}
     {{> "modules/settlement-sheets/templates/parts/settlement/buildings.hbs"}}
+
+    {{!-- Events Tab --}}
+    {{> "modules/settlement-sheets/templates/parts/settlement/events.hbs"}}
 
     {{!-- Notes Tab --}}
     {{> "modules/settlement-sheets/templates/parts/settlement/notes.hbs"}}

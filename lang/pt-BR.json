@@ -1,0 +1,86 @@
+{
+  "TYPES.Actor.settlement-sheets.settlement": "Assentamento",
+  "TYPES.Item.settlement-sheets.building": "Construção",
+  "settlement-sheets": {
+    "SettlementSheets": "Fichas de Assentamento",
+    "EditImage": "Editar Imagem",
+    "PublicNotes": "Notas Públicas",
+    "PrivateNotes": "Notas Privadas",
+    "SettlementDescription": "Descrição do Assentamento",
+    "InfluentialPeople": "Pessoas Influentes",
+    "DetailedStatistics": "Estatísticas Detalhadas",
+    "MostPopulousBuildings": "Construções Mais Populosas",
+    "Demographics": "Demografia",
+    "Taverns": "Tavernas",
+    "Shops": "Comércios",
+    "Temples": "Templos",
+    "NotablePlaces": "Locais Notáveis",
+    "SpecialEvents": "Eventos Especiais",
+    "ClosedEstablishment": "Estabelecimento Fechado",
+    "ClosedEstablishmentHint": "Marque esta opção se o estabelecimento estiver fechado ou indisponível",
+    "SpecialItems": "Itens Especiais",
+    "SpecialItemsHint": "Itens raros ou únicos disponíveis neste local",
+    "OccupationStatus": "Status de Ocupação",
+    "OccupationStatusHint": "Indica se o assentamento está sob ocupação ou controle de outra facção",
+    "DemographicNotes": "Notas Demográficas",
+    "DemographicNotesHint": "Informações adicionais sobre a população (ex: '100% humanos...?')",
+    "RandomEncounter": "Encontro Aleatório",
+    "RandomEncounterHint": "Eventos ou encontros que podem ocorrer neste local",
+    "EditBuilding": "Editar Construção",
+    "NewBuilding": "Nova Construção",
+    "AddNewBuilding": "Adicionar Nova Construção",
+    "AddNewBuildingHint": "Clique para adicionar uma nova construção a este assentamento!",
+    "RemoveBuilding": "Remover Construção",
+    "RemoveBuildingHint": "Tem certeza que deseja remover esta construção?\nTodos os dados desta construção serão excluídos e não poderão ser recuperados.",
+
+    "TABS": {
+      "Overview": "Visão Geral",
+      "Statistics": "Estatísticas",
+      "Buildings": "Construções",
+      "Notes": "Notas",
+      "Events": "Eventos",
+      "Places": "Locais"
+    },
+
+    "CSS": {
+      "BaseColor": "Cor Base",
+      "BaseColorHint": "Define a cor base para as fichas de assentamento e construção.",
+
+      "BackgroundColor": "Cor de Fundo",
+      "BackgroundColorHint": "Define a cor de fundo para as fichas de assentamento e construção.",
+
+      "NavbarTextColor": "Cor do Texto da Barra de Navegação",
+      "NavbarTextColorHint": "Define uma cor personalizada para o texto da barra de navegação.",
+
+      "NavbarLinkHighlight": "Cor de Destaque dos Links da Barra de Navegação",
+      "NavbarLinkHighlightHint": "Define a cor de destaque para os links da barra de navegação.",
+
+      "NavbarGradient1": "Gradiente da Barra de Navegação 1",
+      "NavbarGradient1Hint": "Define a primeira cor do gradiente da barra de navegação.",
+
+      "NavbarGradient2": "Gradiente da Barra de Navegação 2",
+      "NavbarGradient2Hint": "Define a segunda cor do gradiente da barra de navegação."
+    },
+
+    "STATS": {
+      "Income": "Renda",
+      "Population": "População",
+      "Morale": "Moral",
+      "Cost": "Custo",
+      "Prepend": "Adicionar no Início",
+      "Append": "Adicionar no Final",
+      "ShowToPlayers": "Mostrar aos Jogadores",
+      "ShowInHeader": "Mostrar no Cabeçalho",
+      "ShowOnSettlement": "Mostrar no Assentamento",
+      "ToggleVisible": "Alternar Visibilidade para Jogadores",
+      "SheetStatistics": "Estatísticas da Ficha",
+      "StatisticsMenu": "Menu de Estatísticas",
+      "EditStatistics": "Editar Estatísticas",
+      "EditStatisticsHint": "Edite as estatísticas conforme aparecem nas fichas de assentamento e construção.",
+      "ResetStatistics": "Redefinir Estatísticas",
+      "ResetStatisticsHint": "Tem certeza que deseja redefinir todos os dados estatísticos?\nIsso removerá todas as estatísticas e modificações personalizadas que você criou, incluindo dados personalizados nas fichas de assentamento e construção.",
+      "NewStatistic": "Nova Estatística",
+      "AddNewStatistic": "Adicionar Nova Estatística"
+    }
+  }
+}

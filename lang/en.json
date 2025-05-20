@@ -20,6 +20,11 @@
     },
     "DetailedStatistics": "Detailed Statistics",
     "MostPopulousBuildings": "Most Populous Buildings",
+    "Demographics": "Demographics",
+    "Taverns": "Taverns",
+    "Shops": "Shops",
+    "Temples": "Temples",
+    "NotablePlaces": "Notable Places",
     "EditBuilding": "Edit Building",
     "NewBuilding": "New Building",
     "AddNewBuilding": "Add New Building",
@@ -31,7 +36,9 @@
       "Overview": "Overview",
       "Statistics": "Statistics",
       "Buildings": "Buildings",
-      "Notes": "Notes"
+      "Notes": "Notes",
+      "Events": "Events",
+      "Places": "Places"
     },
 
     "CSS": {

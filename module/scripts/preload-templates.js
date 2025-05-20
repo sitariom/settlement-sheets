@@ -1,30 +1,19 @@
 /* global loadTemplates */
-/**
- * Define a set of template paths to pre-load
- * Pre-loaded templates are compiled and cached for fast access when rendering
- * @return {Promise}
- */
-export const _preloadTemplates = async function () {
-  console.log('Preloading partials for the Settlement Sheets module.')
 
-  // Define template paths to load
+export async function _preloadTemplates () {
   const templatePaths = [
-    // Settlement sheet
+    // Actor Sheet Partials
     'modules/settlement-sheets/templates/parts/settlement/overview.hbs',
-    'modules/settlement-sheets/templates/parts/settlement/buildings.hbs',
+    'modules/settlement-sheets/templates/parts/settlement/places.hbs',
     'modules/settlement-sheets/templates/parts/settlement/statistics.hbs',
+    'modules/settlement-sheets/templates/parts/settlement/buildings.hbs',
+    'modules/settlement-sheets/templates/parts/settlement/events.hbs',
     'modules/settlement-sheets/templates/parts/settlement/notes.hbs',
-
-    // Building sheet
+    // Item Sheet Partials
     'modules/settlement-sheets/templates/parts/building/overview.hbs',
     'modules/settlement-sheets/templates/parts/building/statistics.hbs',
-    'modules/settlement-sheets/templates/parts/building/notes.hbs',
-
-    // Dialog templates
-    'modules/settlement-sheets/templates/remove-building-dialog.hbs'
+    'modules/settlement-sheets/templates/parts/building/notes.hbs'
   ]
 
-  /* Load the template parts
-  */
   return loadTemplates(templatePaths)
 }

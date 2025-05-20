@@ -1,0 +1,42 @@
+<div class="tab places" data-group="primary" data-tab="places">
+  <div class="demographics">
+    <h3 class="field-title">{{localize 'settlement-sheets.Demographics'}}</h3>
+    {{#if editable}}
+      {{editor demographics target="system.demographics" button=true editable=editable}}
+    {{else}}
+      <div class="editor-content">{{{demographics}}}</div>
+    {{/if}}
+  </div>
+  <div class="taverns">
+    <h3 class="field-title">{{localize 'settlement-sheets.Taverns'}}</h3>
+    {{#if editable}}
+      {{editor taverns target="system.taverns" button=true editable=editable}}
+    {{else}}
+      <div class="editor-content">{{{taverns}}}</div>
+    {{/if}}
+  </div>
+  <div class="shops">
+    <h3 class="field-title">{{localize 'settlement-sheets.Shops'}}</h3>
+    {{#if editable}}
+      {{editor shops target="system.shops" button=true editable=editable}}
+    {{else}}
+      <div class="editor-content">{{{shops}}}</div>
+    {{/if}}
+  </div>
+  <div class="temples">
+    <h3 class="field-title">{{localize 'settlement-sheets.Temples'}}</h3>
+    {{#if editable}}
+      {{editor temples target="system.temples" button=true editable=editable}}
+    {{else}}
+      <div class="editor-content">{{{temples}}}</div>
+    {{/if}}
+  </div>
+  <div class="notable-places">
+    <h3 class="field-title">{{localize 'settlement-sheets.NotablePlaces'}}</h3>
+    {{#if editable}}
+      {{editor notablePlaces target="system.notablePlaces" button=true editable=editable}}
+    {{else}}
+      <div class="editor-content">{{{notablePlaces}}}</div>
+    {{/if}}
+  </div>
+</div>

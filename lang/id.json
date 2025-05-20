@@ -10,6 +10,22 @@
     "InfluentialPeople": "Orang Berpengaruh",
     "DetailedStatistics": "Statistik Terperinci",
     "MostPopulousBuildings": "Bangunan Terpadat",
+    "Demographics": "Demografia",
+    "Taverns": "Tavernas",
+    "Shops": "Comércios",
+    "Temples": "Igrejas",
+    "NotablePlaces": "Locais Notáveis",
+    "SpecialEvents": "Acara Khusus",
+    "ClosedEstablishment": "Tempat Usaha Tutup",
+    "ClosedEstablishmentHint": "Tandai opsi ini jika tempat usaha tutup atau tidak tersedia",
+    "SpecialItems": "Item Khusus",
+    "SpecialItemsHint": "Item langka atau unik yang tersedia di lokasi ini",
+    "OccupationStatus": "Status Pendudukan",
+    "OccupationStatusHint": "Menunjukkan apakah pemukiman berada di bawah pendudukan atau kendali faksi lain",
+    "DemographicNotes": "Catatan Demografis",
+    "DemographicNotesHint": "Informasi tambahan tentang populasi (mis: '100% manusia...?')",
+    "RandomEncounter": "Pertemuan Acak",
+    "RandomEncounterHint": "Peristiwa atau pertemuan yang mungkin terjadi di lokasi ini",
     "EditBuilding": "Edit Bangunan",
     "NewBuilding": "Bangunan Baru",
     "AddNewBuilding": "Tambah Bangunan Baru",
@@ -21,7 +37,9 @@
       "Overview": "Ikhtisar",
       "Statistics": "Statistik",
       "Buildings": "Bangunan",
-      "Notes": "Catatan"
+      "Notes": "Catatan",
+      "Events": "Acara",
+      "Places": "Tempat"
     },
 
     "CSS": {

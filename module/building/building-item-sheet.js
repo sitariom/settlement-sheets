@@ -30,9 +30,14 @@ export class BuildingItemSheet extends ItemSheet {
     // Define the context we're using
     const context = await super.getData(options)
 
+    // Garantir que o item tem system.trackers inicializado
+    if (!this.item.system.trackers) {
+      this.item.system.trackers = {}
+    }
+
     // Generate quick references in the context for permissions levels
     if (!game.user.isGM && this.item.limited) context.permissions = 'limited'
-    if (!game.user.isGM && this.item.observer) context.permissions = 'observer'
+    if (!game.user.isGM && this.item.permission === 2) context.permissions = 'observer'
     if (game.user.isGM || this.item.isOwner) context.permissions = 'owner'
 
     // Manipulate any data in this context that we need to

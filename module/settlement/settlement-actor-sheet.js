@@ -38,6 +38,9 @@ export class SettlementActorSheet extends ActorSheet {
     if (!game.user.isGM && this.actor.limited) context.permissions = 'limited'
     if (!game.user.isGM && this.actor.permission === 2) context.permissions = 'observer'
     if (game.user.isGM || this.actor.isOwner) context.permissions = 'owner'
+    
+    // Define se o formulário é editável
+    context.editable = this.isEditable
 
     // Prepare items.
     await this._prepareItems(context)
@@ -55,10 +58,17 @@ export class SettlementActorSheet extends ActorSheet {
 
     // Clean up non-existent statistics, such as custom ones that no longer exist
     const validStatistics = new Set(Object.keys(statisticsList))
-    for (const id of Object.keys(trackerData)) {
-      if (!validStatistics.has(id)) {
-        delete trackerData[id]
+    // Garantir que trackerData existe antes de tentar iterar sobre ele
+    if (trackerData) {
+      for (const id of Object.keys(trackerData)) {
+        if (!validStatistics.has(id)) {
+          delete trackerData[id]
+        }
       }
+    } else {
+      // Inicializar trackerData se for nulo ou indefinido
+      this.actor.system.trackers = {}
+      trackerData = this.actor.system.trackers
     }
 
     for (const [id, value] of Object.entries(statisticsList)) {
@@ -117,6 +127,44 @@ export class SettlementActorSheet extends ActorSheet {
       relativeTo: this.object
     })
 
+    // Places tab fields
+    context.demographics = await TextEditor.enrichHTML(this.object.system.demographics, {
+      async: true,
+      secrets: this.object.isOwner,
+      relativeTo: this.object
+    })
+
+    context.taverns = await TextEditor.enrichHTML(this.object.system.taverns, {
+      async: true,
+      secrets: this.object.isOwner,
+      relativeTo: this.object
+    })
+
+    context.shops = await TextEditor.enrichHTML(this.object.system.shops, {
+      async: true,
+      secrets: this.object.isOwner,
+      relativeTo: this.object
+    })
+
+    context.temples = await TextEditor.enrichHTML(this.object.system.temples, {
+      async: true,
+      secrets: this.object.isOwner,
+      relativeTo: this.object
+    })
+
+    context.notablePlaces = await TextEditor.enrichHTML(this.object.system.notablePlaces, {
+      async: true,
+      secrets: this.object.isOwner,
+      relativeTo: this.object
+    })
+
+    // Events tab field
+    context.events = await TextEditor.enrichHTML(this.object.system.events, {
+      async: true,
+      secrets: this.object.isOwner,
+      relativeTo: this.object
+    })
+
     // Private and Public notes
     context.note = {
       public: await TextEditor.enrichHTML(this.object.system.note.public, {
@@ -142,6 +190,11 @@ export class SettlementActorSheet extends ActorSheet {
     // Empty array to hold the buildings list in
     const buildings = []
 
+    // Garantir que context.actor.system.trackers existe
+    if (!context.actor.system.trackers) {
+      context.actor.system.trackers = {}
+    }
+    
     // Initialize or reset each value in the settlement's trackers
     for (const [tracker, details] of Object.entries(statisticsList)) {
       if (details.type === 'number') {
@@ -176,6 +229,11 @@ export class SettlementActorSheet extends ActorSheet {
           relativeTo: this.object
         })
 
+        // Garantir que o item tem system.trackers inicializado
+        if (!i.system.trackers) {
+          i.system.trackers = {}
+        }
+        
         // Iterate through each tracker in the building
         for (const [tracker, details] of Object.entries(statisticsList)) {
           if (details.type === 'number') {
@@ -213,6 +271,9 @@ export class SettlementActorSheet extends ActorSheet {
 
     // Remove a new building from the sheet
     html.find('.remove-building').click(this._onRemoveBuilding.bind(this))
+    
+    // Não precisamos de manipulação adicional para os editores
+    // O conteúdo será exibido corretamente através do template
   }
 
   // Handle opening an existing building in a settlement
@@ -278,4 +339,37 @@ export class SettlementActorSheet extends ActorSheet {
       ]
     })
   }
+
+  /** @override */
+  async _onSubmit(event, {updateData=null, preventClose=false, preventRender=false}={}) {
+    // Capturar o conteúdo dos editores antes do envio do formulário
+    const form = this.element.find('form').get(0);
+    const editorElements = form.querySelectorAll('.editor-content');
+    
+    // Criar um objeto para armazenar os dados atualizados
+    const formData = {};
+    
+    // Capturar o conteúdo de todos os editores
+    for (let editor of editorElements) {
+      const target = editor.dataset.edit;
+      if (target) {
+        formData[target] = editor.innerHTML;
+      }
+    }
+    
+    // Mesclar os dados capturados com os dados de atualização existentes
+    updateData = foundry.utils.mergeObject(updateData || {}, formData);
+    
+    // Continuar com o envio padrão
+    const result = await super._onSubmit(event, {updateData, preventClose, preventRender});
+    
+    // Forçar uma re-renderização completa para garantir que os dados atualizados sejam exibidos
+    if (!preventRender) {
+      this.render(true);
+    }
+    
+    return result;
+  }
+  
+
 }

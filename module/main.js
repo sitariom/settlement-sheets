@@ -46,6 +46,26 @@ Hooks.once('ready', () => {
   _migrateExistingData()
 })
 
+// Hook para garantir que novos atores tenham trackers inicializados
+Hooks.on('preCreateActor', (actor, data) => {
+  if (actor.type === 'settlement-sheets.settlement') {
+    // Garantir que system.trackers existe
+    if (!actor.system?.trackers) {
+      actor.updateSource({'system.trackers': {}})
+    }
+  }
+})
+
+// Hook para garantir que novos itens tenham trackers inicializados
+Hooks.on('preCreateItem', (item, data) => {
+  if (item.type === 'settlement-sheets.building') {
+    // Garantir que system.trackers existe
+    if (!item.system?.trackers) {
+      item.updateSource({'system.trackers': {}})
+    }
+  }
+})
+
 // Função para migrar dados existentes
 async function _migrateExistingData() {
   // Migrar edifícios que têm dados no campo description para o novo campo definition

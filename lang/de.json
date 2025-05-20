@@ -21,7 +21,9 @@
       "Overview": "Übersicht",
       "Statistics": "Statistiken",
       "Buildings": "Gebäude",
-      "Notes": "Notizen"
+      "Notes": "Notizen",
+      "Events": "Ereignisse",
+      "Places": "Orte"
     },
 
     "CSS": {

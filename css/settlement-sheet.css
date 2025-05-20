@@ -134,6 +134,10 @@
   height: 250px !important;
 }
 
+.settlement-sheet .editor-content {
+  color: inherit;
+}
+
 .settlement-sheet .editable .editor {
   overflow: visible;
 }
@@ -149,6 +153,26 @@
 
 .settlement-sheet .editable .note .editor .editor-edit {
   top: -43px;
+}
+
+/* Garantir que o conteúdo dos editores seja sempre visível */
+.settlement-sheet .editor-content {
+  display: block !important;
+  min-height: 50px;
+}
+
+/* Estilos específicos para as abas Places e Events */
+.settlement-sheet .tab.places .editor-content,
+.settlement-sheet .tab.events .editor-content {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+/* Garantir que o conteúdo seja visível mesmo quando não está em modo de edição */
+.settlement-sheet .editor-content:not(.active) {
+  display: block !important;
 }
 
 /* Trackers */
